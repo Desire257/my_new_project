@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Camion index{% endblock %}
+
+{% block body %}
+    <h1>Camion index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Plaque</th>
+                <th>NumeroChassis</th>
+                <th>DateMiseCirc</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for camion in camions %}
+            <tr>
+                <td>{{ camion.id }}</td>
+                <td>{{ camion.nom }}</td>
+                <td>{{ camion.plaque }}</td>
+                <td>{{ camion.numeroChassis }}</td>
+                <td>{{ camion.DateMiseCirc ? camion.DateMiseCirc|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_camion_show', {'id': camion.id}) }}">show</a>
+                    <a href="{{ path('app_camion_edit', {'id': camion.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_camion_new') }}">Create new</a>
+{% endblock %}
