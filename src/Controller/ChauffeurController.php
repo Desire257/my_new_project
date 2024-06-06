@@ -22,8 +22,8 @@ class ChauffeurController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_chauffeur_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/new_chauffeur', name: 'app_chauffeur_new', methods: ['GET', 'POST'])]
+    public function new_chauffeur(Request $request, EntityManagerInterface $entityManager): Response
     {
         $chauffeur = new Chauffeur();
         $form = $this->createForm(ChauffeurType::class, $chauffeur);
@@ -71,7 +71,7 @@ class ChauffeurController extends AbstractController
     #[Route('/{id}', name: 'app_chauffeur_delete', methods: ['POST'])]
     public function delete(Request $request, Chauffeur $chauffeur, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$chauffeur->getId(), $request->getPayload()->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $chauffeur->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($chauffeur);
             $entityManager->flush();
         }
